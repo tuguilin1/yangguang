@@ -2,12 +2,12 @@
   <div class="index">
      <section class="nav">
        <nav class="left-nav">
-         <div v-for="(item,index) in leftNavs" :key="index" :class="[index%2==0?'active1':'',index!==0&&index!==1?'active2':'']"><nuxt-link :to="'/'+item">{{item}}</nuxt-link></div>
+         <div v-for="(item,index) in leftNavs" :key="index" :class="[index%2==0?'active1':'',index!==0&&index!==1?'active2':'']"><nuxt-link :to="'/search/'+item">{{item}}</nuxt-link></div>
        </nav>
        <nav class="banner">
          <div class="block">
             <el-carousel height="350px">
-              <el-carousel-item v-for="item in bannerData" :key="item.id">
+              <el-carousel-item v-for="item in bannerData" :key="item.id" :interval="5000">
                 <div class="wrap-img"><img :src="item.pic"></div>
               </el-carousel-item>
             </el-carousel>
@@ -20,6 +20,16 @@
      <section class="container">
        <goods-list :goods-list="goodsData"></goods-list>
      </section>
+     <section class="pages">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="130"
+          @current-change="changePage"
+          >
+        </el-pagination>
+     </section>
+
   </div>
 </template>
 
@@ -38,18 +48,20 @@ export default {
       pageNum:1
     }
   },
-  asyncData() {
-    return axios.all([axios.get('http://127.0.0.1:3000/data/banner'),axios.get("http://127.0.0.1:3000/data/pagedata?page=1")]).then((arr)=>{
-      console.log(arr);
+  asyncData(context) {
+    return axios.all([axios.get('http://127.0.0.1:3000/data/banner'),axios.get(`http://127.0.0.1:3000/data/pagedata?page=1`)]).then((data)=>{
       return {
-        "bannerData":arr[0].data,
-        "goodsData":arr[1].data
+        "bannerData":data[0].data,
+        "goodsData":data[1].data
       }
-    });
+    })
   },
-  mounted(){
-    console.log(this.goodsData)
-  }
+  methods:{
+
+      async changePage(index){
+        this.$router.push({path:"/page",query:{pageNum:index}})
+      }
+  },
 }
 </script>
 
@@ -59,7 +71,7 @@ export default {
     padding: 0;
   }
   .index{
-    width: 100%;
+    width: 1350px;
     box-sizing: border-box;
     padding-left: 5%;
     padding-right: 5%;
@@ -121,6 +133,18 @@ export default {
     }
     .container{
       margin-top: 30px;
+      height: 3280px;
+    }
+    .pages{
+      height: 50px;
+      margin-top: 100px;
+    }
+      .el-pagination{
+      position: absolute;
+      left:35%;
+    }
+    .el-pagination.is-background .el-pager li:not(.disabled).active{
+      background-color: @color
     }
   }
 </style>

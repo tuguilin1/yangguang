@@ -5,15 +5,9 @@
 			<div class="update-info">每天10点上新</div>
 		</header>
 		<section class="goods-container">
-			<Goods v-for = "(item,key) in goodsList" :goods="item" :key="index" />
+			<Goods v-for = "(item,index) in goodsList" :goods="item" :key="index" />
 		</section>
-		<footer>
-			<el-pagination
-			  background
-			  layout="prev, pager, next"
-			  :total="1300">
-			</el-pagination>
-		</footer>
+
 		
 	</div>
 </template>
@@ -59,12 +53,6 @@
 			.update-info{
 				color:#999;
 			}
-		}
-		footer{
-			position: relative;
-			width: 100%;
-			height: 30px;
-			margin-top: 60px;
 		}
 	}
 	.el-pagination{

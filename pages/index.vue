@@ -71,10 +71,10 @@ export default {
     padding: 0;
   }
   .index{
-    width: 1350px;
+    min-width: 1200px;
     box-sizing: border-box;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 50px;
+    padding-right: 50px;
     background: #f6f6f6;
     .nav{
       display: flex;

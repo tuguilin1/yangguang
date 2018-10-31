@@ -14,13 +14,13 @@
 			</div>
 			<activity-tag></activity-tag>
 			<div class="header-search">
-				<div><input type="search" class="search" name=""></div>
-				<div class="btn-search"></div>
+				<div><input type="search" class="search" name="" v-model="value"></div>
+				<div class="btn-search" @click="search"></div>
 			</div>
 		</header>
-		<nav class="bottom-nav" @click="jumUrl">
-			<div :class="activeNum==0?'active':'not-active'">首页</div>
-			<div :class="activeNum==1?'active':'not-active'">品牌折扣</div>
+		<nav class="bottom-nav">
+			<nuxt-link tag="div" to="/" :class="activeNum==0?'active':'not-active'">首页</nuxt-link>
+			<nuxt-link tag="div" to="/brand?num=1" :class="activeNum==1?'active':'not-active'">品牌折扣</nuxt-link>
 			<div :class="activeNum==2?'active':'not-active'">9.9包邮</div>
 			<div :class="activeNum==3?'active':'not-active'">即将上线</div>
 		</nav>
@@ -36,25 +36,26 @@
 		},
 		data(){
 			return{
-				activeNum:0
+				activeNum:0,
+				value:""
 			}
 		},
 		methods:{
-			jumUrl(e){
-				switch(e.target.innerHTML){
-					case "首页":
+			search(){
+				this.$router.push(`/search/${this.value}`)
+			}
+		},
+		watch:{
+			$route(){
+				switch(this.$route.name){
+					case "index":
 						this.activeNum = 0;
 						break;
-					case "品牌折扣":
+					case "brand":
 						this.activeNum = 1;
 						break;
-					case "9.9包邮":
-						this.activeNum = 2;
-						break;
-					case "即将上线":
-						this.activeNum = 3;
-						break
-
+					default:
+						this.activeNum = -1;
 				}
 			}
 		}
@@ -68,6 +69,7 @@
 		padding: 0;
 	}
 	.header{
+		min-width: 1000px;
 		margin:0;
 		padding: 0;
 		.top-head{
@@ -86,8 +88,8 @@
 		}
 		header{
 			box-sizing: border-box;
-			padding-left: 5%;
-			padding-right: 5%;
+			padding-left: 50px;
+			padding-right: 50px;
 			padding-top: 10px;
 			display: flex;
 			height: 60px;
@@ -120,7 +122,7 @@
 		}
 		.bottom-nav{
 			box-sizing: border-box;
-			padding-left: 5%;
+			padding-left: 50px;
 			display: flex;
 			height: 40px;
 			border-bottom:2px solid @color;

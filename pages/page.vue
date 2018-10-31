@@ -9,7 +9,7 @@
 	          layout="prev, pager, next"
 	          :total="130"
 	          @current-change="changePage"
-	          :current-page="$route.query.pageNum"
+	          :current-page='2'
 	          >
 	        </el-pagination>
 	    </section>
@@ -42,12 +42,12 @@
 
 <style type="text/css" lang="less">
 	.pagenum{
-		width:1350px;
+		min-width:1200px;
       	margin-top: 30px;
         height: 3400px;
         box-sizing: border-box;
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 50px;
+        padding-right: 50px;
     }
     .pages{
         height: 50px;

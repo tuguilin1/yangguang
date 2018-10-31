@@ -38,6 +38,7 @@
 		padding: 0;
 	}
 	.footer{
+		margin-top: 50px;
 		height: 200px;
 		border-top:2px solid #ff464e;
 		padding-left: 20%;

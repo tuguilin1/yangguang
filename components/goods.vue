@@ -1,9 +1,9 @@
 <template>
 	<div class="goods">
-		<img :src="goods.pic_url" alt="">
+		<img :src="goods.pic_url||goods.picurl||goods.pic" alt="">
 		<div class="goods-info">
 			<div class="goods-name">
-				{{goods.cprice?`￥${goods.cprice}`:goods.coupon_tips}}
+				{{goods.cprice||goods.coupon_tips||goods.cp}}
 			</div>
 			<div class="goods-content">
 				<div>{{goods.title}}</div>

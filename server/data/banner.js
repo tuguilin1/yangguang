@@ -1,5 +1,5 @@
 import Router from "koa-router";
-import {getBanner} from "../util/getdata.js"
+import {getBanner,getData} from "../util/getdata.js"
 import {getPageData} from "../util/getdata.js"
 const router = new Router({
 	prefix:"/data"

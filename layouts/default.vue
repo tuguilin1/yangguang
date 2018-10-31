@@ -28,4 +28,8 @@
 .el-header{
   height: auto !important;
 }
+.el-main{
+  overflow:inherit;
+  padding: 0;
+}
 </style>

@@ -53,4 +53,24 @@ router.get('/',async (ctx)=>{
 	}
 })
 
+
+
+router.get("/detailData",async (ctx) =>{
+	let url = ctx.query.url;
+	let data = await getData(url);
+	if(data === "err"){
+		ctx.status = 404
+		ctx.body = {
+			status:0,
+			data:"err"
+		}
+	}else{
+		ctx.status = 200
+		ctx.body = {
+			status:1,
+			data:data
+		}
+	}
+})
+
 export default router
